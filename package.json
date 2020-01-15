@@ -1,0 +1,23 @@
+{
+  "name": "create-clean-project",
+  "version": "1.0.0",
+  "description": "A CLI to bootstrap a clean archicted nodejs app",
+  "main": "src/index.js",
+  "bin": {
+    "@your_npm_username/create-project": "bin/create-project",
+    "create-project": "bin/create-project"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jean-Philippe BLOND",
+  "license": "MIT",
+  "dependencies": {
+    "arg": "^4.1.2",
+    "esm": "^3.2.25"
+  }
+}
