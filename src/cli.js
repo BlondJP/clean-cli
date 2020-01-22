@@ -1,5 +1,6 @@
 // import arg from "arg";
-import { generateController } from "./generate-module";
+import { generateControllers } from "./generate-module";
+import kebabCase from "kebab-case";
 
 export function cli(args) {
   const moduleName = args[2];
@@ -8,8 +9,10 @@ export function cli(args) {
     throw new Error("Error: a module name must be provided as argument.");
   }
 
-  console.log(moduleName);
-  generateController(moduleName).then(path => {
+  const pascalCasedModuleName = kebabCase.reverse(moduleName);
+
+  console.log(pascalCasedModuleName);
+  generateControllers(pascalCasedModuleName).then(path => {
     console.log("path", path);
   });
 }
