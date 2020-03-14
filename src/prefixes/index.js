@@ -25,7 +25,7 @@ export const dataAccessPrefixes = [
   "delete"
 ];
 
-export const keys = {
+export const actions = {
   creating: 0,
   gettingOne: 1,
   gettingAll: 2,

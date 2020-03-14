@@ -1,18 +1,15 @@
 //deps
-const sourceDir = "/home/jp_blond/Projects/clean-cli/src";
+const sourceDir = "/home/jp_blond/Projects/perso/clean-cli/tmp";
 import { controllerPrefixes } from "../prefixes";
 import createFile from "../utils/create-file";
 import { generateControllerCode } from "../generate-template";
 
 // factories
-import makeGenerateController from "./generate-controllers";
+import makeGenerateControllers from "./generate-controllers";
 
 // batery included exports
-export const { generateControllers } = makeGenerateController(
+export const { generateController } = makeGenerateControllers(
   sourceDir,
-  controllerPrefixes,
   createFile,
   generateControllerCode
 );
-
-console.log("generateControllers", generateControllers);
