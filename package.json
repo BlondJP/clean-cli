@@ -1,11 +1,10 @@
 {
-  "name": "create-clean-project",
-  "version": "1.0.0",
+  "name": "clean-cli",
+  "version": "0.0.4",
   "description": "A CLI to bootstrap a clean archicted nodejs app",
   "main": "src/index.js",
   "bin": {
-    "@your_npm_username/create-project": "bin/create-project",
-    "create-project": "bin/create-project"
+    "clean-cli": "bin/clean.js"
   },
   "publishConfig": {
     "access": "public"
@@ -20,5 +19,14 @@
     "arg": "^4.1.2",
     "esm": "^3.2.25",
     "kebab-case": "^1.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlondJP/clean-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BlondJP/clean-cli/issues"
+  },
+  "homepage": "https://github.com/BlondJP/clean-cli#readme"
 }
