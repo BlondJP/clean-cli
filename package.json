@@ -10,7 +10,7 @@
     "access": "public"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Jean-Philippe BLOND",
@@ -21,7 +21,16 @@
     "esm": "^3.2.25",
     "kebab-case": "^1.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@types/jest": "^25.2.1",
+    "babel-jest": "^25.3.0",
+    "babel-polyfill": "^6.26.0",
+    "faker": "^4.1.0",
+    "jest": "^25.3.0",
+    "regenerator-runtime": "^0.13.5"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BlondJP/clean-cli.git"
