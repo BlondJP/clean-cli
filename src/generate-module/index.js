@@ -4,15 +4,16 @@ const sourceDir = "/home/jp_blond/Projects/perso/clean-cli/tmp";
 const appRoot = require("app-root-path");
 console.log("appRoot", appRoot.path);
 
-import createFile from "../utils/create-file";
+import { createFile, checkFolderExist } from "../utils";
 import { generateControllerCode } from "../generate-template";
 
 // factories
-import makeGenerateControllers from "./generate-controllers";
+import makeGenerateController from "./generate-controller";
 
-// batery included exports
-export const { generateController } = makeGenerateControllers(
+// battery included exports
+export const generateController = makeGenerateController(
   sourceDir,
   createFile,
-  generateControllerCode
+  generateControllerCode,
+  checkFolderExist
 );
