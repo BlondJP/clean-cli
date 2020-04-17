@@ -6,6 +6,8 @@ export default (sourceDir, createFile, createTemplate, checkFolderExist) =>
     await checkFolderExist(controllersFolder);
     const filePath = `${controllersFolder}/${fileName}`;
 
-    await createFile(filePath, createTemplate(moduleName, prefix));
+    const template = createTemplate(moduleName, prefix);
+    await createFile(filePath, template);
+
     return filePath;
   };
