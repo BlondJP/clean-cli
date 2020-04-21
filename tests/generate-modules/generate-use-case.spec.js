@@ -1,12 +1,12 @@
 import faker from "faker";
 import fs from "fs";
-import makeGenerateController from "../../src/generate-modules/generate-controller";
+import makeGenerateUseCase from "../../src/generate-modules/generate-use-case";
 import appRoot from "app-root-path";
 import { checkFolderExist, createFile } from "../../src/utils";
-import { controllerPrefixes, actions } from "../../src/prefixes";
+import { useCasePrefixes, actions } from "../../src/prefixes";
 
-describe("testing generate controller", () => {
-  it("generate a controller succesfuly full mock", async () => {
+describe("testing generate use case", () => {
+  it("generate a usecase succesfuly full mock", async () => {
     // mocks
     const sourceDir = "/" + faker.hacker.noun() + "/" + faker.hacker.noun();
     const createFile = jest.fn();
@@ -16,31 +16,30 @@ describe("testing generate controller", () => {
 
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
-    const prefix = Object.keys(actions)[actions.creating];
+    const action = Object.keys(actions)[actions.creating];
 
     // usage
-    const generateController = makeGenerateController(
+    const generateUsecase = makeGenerateUseCase(
       sourceDir,
       createFile,
       createTemplate,
       checkFolderExist,
-      controllerPrefixes,
+      useCasePrefixes,
       actions
     );
-    const filePath = await generateController(moduleName, prefix);
 
-    expect(typeof filePath).toBe("string");
-    expect(checkFolderExist).toHaveBeenCalledWith(`${sourceDir}/controllers`);
+    const filePath = await generateUsecase(moduleName, action);
+    expect(checkFolderExist).toHaveBeenCalledWith(`${sourceDir}/use-cases`);
     expect(createTemplate).toHaveBeenCalledWith(
       moduleName,
-      controllerPrefixes[actions.creating],
-      prefix
+      useCasePrefixes[actions[action]],
+      action
     );
     expect(createFile).toHaveBeenCalledWith(filePath, template);
   });
 
-  it("generate a controller succesfuly creating the file", async () => {
-    // mocks
+  it("generate a usecase succesfuly creating the file", async () => {
+    // deps
     const rootDir = appRoot.path;
     const sourceDir = rootDir + "/tmp";
     const template = faker.random.words();
@@ -48,18 +47,20 @@ describe("testing generate controller", () => {
 
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
-    const prefix = faker.random.word();
+    const action = Object.keys(actions)[actions.creating];
 
     // usage
-    const generateController = makeGenerateController(
+    const generateUsecase = makeGenerateUseCase(
       sourceDir,
       createFile,
       createTemplate,
       checkFolderExist,
-      controllerPrefixes,
+      useCasePrefixes,
       actions
     );
-    const filePath = await generateController(moduleName, prefix);
+
+    const filePath = await generateUsecase(moduleName, action);
+
     expect(typeof filePath).toBe("string");
 
     const content = await fs.promises.readFile(filePath, "utf-8");
@@ -67,6 +68,6 @@ describe("testing generate controller", () => {
 
     // clean tmp directory
     await fs.promises.unlink(filePath);
-    await fs.promises.rmdir(sourceDir + "/controllers");
+    await fs.promises.rmdir(sourceDir + "/use-cases");
   });
 });
