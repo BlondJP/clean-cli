@@ -3,7 +3,7 @@ export const controllerPrefixes = [
   "get-one",
   "get-all",
   "update",
-  "delete"
+  "delete",
 ];
 
 export const useCasePrefixes = [
@@ -11,7 +11,7 @@ export const useCasePrefixes = [
   "find-one",
   "find-all",
   "edit",
-  "remove"
+  "remove",
 ];
 
 // to specify
@@ -22,7 +22,7 @@ export const dataAccessPrefixes = [
   "find-one", // maybe "select" to respect SQL vocabulary
   "find-all",
   "update",
-  "delete"
+  "remove",
 ];
 
 export const actions = {
@@ -30,5 +30,5 @@ export const actions = {
   gettingOne: 1,
   gettingAll: 2,
   updating: 3,
-  removing: 4
+  removing: 4,
 };
