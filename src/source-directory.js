@@ -1,5 +1,6 @@
 import appRoot from "app-root-path";
 
-// export const sourceDirectory = appRoot.path; /** prod */
-const sourceDirectory = appRoot.path + "/tmp";
+const sourceDirectory = appRoot.path; /** prod */
+// const sourceDirectory = appRoot.path + "/tmp"; // dev
+
 export default sourceDirectory;
