@@ -1,8 +1,6 @@
-import { generateUseCase } from "../generate-modules";
-
 export default (
-  { generateController },
-  { actions, controllerPrefixes, useCasePrefixes },
+  { generateController, generateUseCase, generateDataAccess },
+  { actions },
   kebabCase
 ) =>
   async function cli([nodePath, rootFilePath, command, action, moduleName]) {
@@ -32,6 +30,11 @@ export default (
       });
       generateUseCase(moduleName, action).then((path) => {
         console.log(`use case has been created here ${path}`);
+      });
+      generateDataAccess(moduleName, action).then((path) => {
+        if (path) {
+          console.log(`data-access has been created here ${path}`);
+        }
       });
     } catch (err) {
       console.log(err.message);
