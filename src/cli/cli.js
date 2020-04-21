@@ -1,9 +1,11 @@
+import { generateUseCase } from "../generate-modules";
+
 export default (
   { generateController },
-  { actions, controllerPrefixes },
+  { actions, controllerPrefixes, useCasePrefixes },
   kebabCase
 ) =>
-  function cli([nodePath, rootFilePath, command, action, moduleName]) {
+  async function cli([nodePath, rootFilePath, command, action, moduleName]) {
     if (!command) {
       throw new Error("Error: you must provide a command ex: generate");
     }
@@ -24,9 +26,14 @@ export default (
       throw new Error("Error: the module name must be provided in kebab-case.");
     }
 
-    generateController(moduleName, controllerPrefixes[actions[action]]).then(
-      path => {
-        console.log(`cat ${path}`);
-      }
-    );
+    try {
+      generateController(moduleName, action).then((path) => {
+        console.log(`controller has been created here ${path}`);
+      });
+      generateUseCase(moduleName, action).then((path) => {
+        console.log(`use case has been created here ${path}`);
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
   };
