@@ -1,14 +1,14 @@
 // dependencies
 import kebabCase from "kebab-case";
-import { generateController } from "../generate-module";
-import { actions, controllerPrefixes } from "../prefixes";
+import { generateController, generateUseCase } from "../generate-modules";
+import { actions, controllerPrefixes, useCasePrefixes } from "../prefixes";
 
 // factories
 import makeCli from "./cli";
 
 const cli = makeCli(
-  { generateController },
-  { actions, controllerPrefixes },
+  { generateController, generateUseCase },
+  { actions, controllerPrefixes, useCasePrefixes },
   kebabCase
 );
 module.exports = cli;
