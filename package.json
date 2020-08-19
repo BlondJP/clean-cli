@@ -1,0 +1,22 @@
+{
+  "name": "clean-cli",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlondJP/clean-cli.git"
+  },
+  "author": "Jean-Philippe BLOND",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlondJP/clean-cli/issues"
+  },
+  "bin": {
+    "clean": "./index.js"
+  },
+  "homepage": "https://github.com/BlondJP/clean-cli#readme"
+}
