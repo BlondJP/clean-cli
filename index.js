@@ -14,10 +14,11 @@ console.log({ fileType, entityName });
 
 // type : node index.js -g controller -e user
 
-const { path } = require("app-root-path");
-console.log("rootPath", path);
+const path = require("path");
+const rootPath = path.dirname(require.main.filename);
+console.log("rootPath", rootPath);
 
-const filePath = `${path}/generated-by-clean-cli-${fileType}-${entityName}.js`;
+const filePath = `${rootPath}/generated-by-clean-cli-${fileType}-${entityName}.js`;
 console.log("filePath", filePath);
 
 const fs = require("fs");
