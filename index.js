@@ -12,22 +12,16 @@ program.parse(process.argv);
 const { generateFile: fileType, entityName } = program;
 console.log({ fileType, entityName });
 
-// type : node index.js -g controller -e user
-
-const path = require("path");
-const rootPath = path.dirname(require.main.filename);
-console.log("rootPath", rootPath);
-
-const filePath = `${rootPath}/generated-by-clean-cli-${fileType}-${entityName}.js`;
-console.log("filePath", filePath);
-
 const fs = require("fs");
+const getCurrentDir = require("./get-current-dir");
+const currentDir = getCurrentDir();
+const filePath = `${currentDir}/generated-by-clean-cli-${fileType}-${entityName}.js`;
 
 fs.promises
-  .writeFile(filePath, "lorem upsum", (err) => {
+  .writeFile(filePath, "lorem ipsum", (err, f) => {
     if (err) {
-      Promise.reject(err);
+      return Promise.reject(err);
     }
-    Promise.resolve(filePath);
+    console.log("filePath", filePath);
   })
-  .then((file) => console.log(`${file} has been created.`));
+  .catch((err) => console.log(err));

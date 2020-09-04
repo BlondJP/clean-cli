@@ -1,3 +1,3 @@
 npm install --save clean-cli
 
-node_modules/clean-cli/index.js -g controller -e user
+clean-cli -g controller -e user
