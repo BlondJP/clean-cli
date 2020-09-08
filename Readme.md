@@ -1,3 +1,3 @@
-npm install --save clean-cli
+npm install -g clean-cli
 
 clean-cli -g controller -e user
