@@ -1,6 +1,6 @@
-const fs = require("fs");
+import fs from "fs";
 
-function getCurrentDir() {
+export default function getCurrentDir() {
   const currentDir = process.env.PWD;
   const sourceDir = "/src";
 
@@ -12,5 +12,3 @@ function getCurrentDir() {
 
   return currentDir;
 }
-
-module.exports = getCurrentDir;
