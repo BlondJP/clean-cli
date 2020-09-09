@@ -1,10 +1,11 @@
 {
   "name": "clean-cli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -16,10 +17,16 @@
     "url": "https://github.com/BlondJP/clean-cli/issues"
   },
   "bin": {
-    "clean-cli": "./index.js"
+    "clean-cli": "./dist/index.js"
   },
   "homepage": "https://github.com/BlondJP/clean-cli#readme",
   "dependencies": {
-    "commander": "^6.1.0"
+    "commander": "^6.1.0",
+    "kebab-case": "^1.0.0",
+    "systemjs": "^6.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.6.4",
+    "typescript": "^4.0.2"
   }
 }
