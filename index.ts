@@ -1,9 +1,9 @@
 #! /usr/bin/env node
 import { Command } from "commander";
-import { generateController } from "./src/generate-modules";
+import { generateController, generateUseCase } from "./src/generate-modules";
 
 const program = new Command();
-program.version("0.0.1");
+program.version("1.1.0");
 program
   .option("-g --file-type <fileType>", "type of the file we will generate")
   .option("-e --entity-name <entityName>", "name of the entity we will server")
@@ -15,6 +15,10 @@ console.log({ fileType, entityName, actionType });
 
 if (fileType === "controller") {
   generateController(entityName, actionType)
+    .then((message) => console.log(message))
+    .catch((err) => console.error(err));
+} else if (fileType === "useCase") {
+  generateUseCase(entityName, actionType)
     .then((message) => console.log(message))
     .catch((err) => console.error(err));
 }
