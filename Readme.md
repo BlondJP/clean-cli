@@ -69,6 +69,12 @@ cd clean-cli
 Then
 
 ```
+npm install
+```
+
+Then
+
+```
 npm run build
 ```
 
@@ -76,6 +82,14 @@ then try
 
 ```
 clean-cli -g controller -e user -a creating
+```
+
+### Testing
+
+To launch unit tests
+
+```
+npm run test
 ```
 
 ## Author
