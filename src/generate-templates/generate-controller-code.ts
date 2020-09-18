@@ -9,7 +9,6 @@ export default (
     prefix: string,
     action: string
   ): string {
-    console.log("prefix", prefix);
     const formatedPrefix = convertToCamelCase(prefix);
     const camelCaseModuleName = convertToCamelCase(moduleName);
 
