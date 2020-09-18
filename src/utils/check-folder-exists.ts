@@ -20,7 +20,7 @@ export default (fs) => {
     });
   }
 
-  return async function checkFolderExist(folderPath) {
+  return async function checkFolderExist(folderPath: string): Promise<boolean> {
     try {
       const exists = await isFolderExisting(folderPath);
       if (!exists) {

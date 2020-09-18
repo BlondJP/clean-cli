@@ -1,6 +1,6 @@
 // deps
 import currentDir from "../../get-current-dir";
-const sourceDir = `${currentDir()}/src`;
+const sourceDir: string = `${currentDir()}/src`;
 
 import { actions, controllerPrefixes } from "../prefixes";
 
