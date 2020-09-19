@@ -1,6 +1,10 @@
 #! /usr/bin/env node
 import { Command } from "commander";
-import { generateController, generateUseCase } from "./src/generate-modules";
+import {
+  generateController,
+  generateUseCase,
+  generateDataAccess,
+} from "./src/generate-modules";
 
 const program = new Command();
 program.version("1.1.0");
@@ -19,6 +23,10 @@ if (fileType === "controller") {
     .catch((err) => console.error(err));
 } else if (fileType === "useCase") {
   generateUseCase(entityName, actionType)
+    .then((message) => console.log(message))
+    .catch((err) => console.error(err));
+} else if (fileType === "dataAccess") {
+  generateDataAccess(entityName, actionType)
     .then((message) => console.log(message))
     .catch((err) => console.error(err));
 }
