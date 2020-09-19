@@ -1,6 +1,6 @@
 node_modules/
 tmp/
-generated-by-clean*
 dist/
 src/controllers/
 src/use-cases/
+src/data-access/
