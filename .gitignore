@@ -4,3 +4,4 @@ dist/
 src/controllers/
 src/use-cases/
 src/data-access/
+src/entities/

@@ -41,6 +41,8 @@ Example
 ```
 clean-cli -g controller -e user -a creating
 clean-cli -g useCase -e user -a creating
+clean-cli -g dataAccess -e user -a creating
+clean-cli -g entity -e user -a creating
 
 ```
 
@@ -49,6 +51,8 @@ or
 ```
 clean-cli -g controller -e user -a gettingOne
 clean-cli -g useCase -e user -a gettingOne
+clean-cli -g dataAccess -e user -a gettingOne
+clean-cli -g entity -e user -a gettingOne
 
 ```
 
