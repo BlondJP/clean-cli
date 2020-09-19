@@ -2,7 +2,7 @@ export default (
   convertToCamelCase: (str: string) => string,
   capitalizeFirstLetter: (str: string) => string
 ) =>
-  function generateUseCaseCode(moduleName: string, prefix: string) {
+  function generateEntityCode(moduleName: string, prefix: string) {
     const formatedPrefix = convertToCamelCase(prefix);
     const camelCaseModuleName = convertToCamelCase(moduleName);
 
@@ -11,10 +11,7 @@ export default (
         ? capitalizeFirstLetter(camelCaseModuleName)
         : camelCaseModuleName;
 
-    const template = `export default (${camelCaseModuleName}Db) => 
-async function ${formatedPrefix}${formatedModuleName}(${camelCaseModuleName}Infos) {
-
-}`;
+    const template = `export default () => async function ${formatedPrefix}${formatedModuleName}(${camelCaseModuleName}Infos) {}`;
 
     return template;
   };

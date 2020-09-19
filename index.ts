@@ -4,6 +4,7 @@ import {
   generateController,
   generateUseCase,
   generateDataAccess,
+  generateEntity,
 } from "./src/generate-modules";
 
 const program = new Command();
@@ -27,6 +28,10 @@ if (fileType === "controller") {
     .catch((err) => console.error(err));
 } else if (fileType === "dataAccess") {
   generateDataAccess(entityName, actionType)
+    .then((message) => console.log(message))
+    .catch((err) => console.error(err));
+} else if (fileType === "entity") {
+  generateEntity(entityName, actionType)
     .then((message) => console.log(message))
     .catch((err) => console.error(err));
 }

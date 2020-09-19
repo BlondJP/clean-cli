@@ -2,7 +2,12 @@
 import currentDir from "../../get-current-dir";
 const sourceDir: string = `${currentDir()}/src`;
 
-import { actions, controllerPrefixes, useCasePrefixes } from "../prefixes";
+import {
+  actions,
+  controllerPrefixes,
+  useCasePrefixes,
+  entityPrefixes,
+} from "../prefixes";
 
 import { createFile, checkFolderExist, checkFileExist } from "../utils";
 
@@ -10,12 +15,14 @@ import {
   generateControllerCode,
   generateUseCaseCode,
   generateDataAccessCode,
+  generateEntityCode,
 } from "../generate-templates";
 
 // factories
 import makeGenerateController from "./generate-controller";
 import makeGenerateUseCase from "./generate-use-case";
 import makeGenerateDataAccess from "./generate-data-access";
+import makeGenerateEntity from "./generate-entity";
 
 // exports
 export const generateController = makeGenerateController(
@@ -42,4 +49,14 @@ export const generateDataAccess = makeGenerateDataAccess(
   generateDataAccessCode,
   checkFolderExist,
   checkFileExist
+);
+
+export const generateEntity = makeGenerateEntity(
+  sourceDir,
+  createFile,
+  generateEntityCode,
+  checkFolderExist,
+  checkFileExist,
+  entityPrefixes,
+  actions
 );
