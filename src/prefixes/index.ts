@@ -15,7 +15,7 @@ export const useCasePrefixes = [
 ];
 
 // to specify
-export const entityPrefixes = [];
+export const entityPrefixes = ["build", null, null, "update", null];
 
 export const dataAccessPrefixes = [
   "insert",
