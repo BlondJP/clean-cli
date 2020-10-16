@@ -8,30 +8,33 @@ import {
 } from "./src/generate-modules";
 
 const program = new Command();
-program.version("1.1.0");
-program
-  .option("-g --file-type <fileType>", "type of the file we will generate")
-  .option("-e --entity-name <entityName>", "name of the entity we will server")
-  .option("-a --action-type <actionType>", "action the controller will do");
+
+program.version("1.4.0");
 program.parse(process.argv);
 
-const { fileType, entityName, actionType } = program;
-console.log({ fileType, entityName, actionType });
+const [command, layer, action, data] = program.args;
+console.log("received", {command, layer, action, data});
 
-if (fileType === "controller") {
-  generateController(entityName, actionType)
-    .then((message) => console.log(message))
-    .catch((err) => console.error(err));
-} else if (fileType === "useCase") {
-  generateUseCase(entityName, actionType)
-    .then((message) => console.log(message))
-    .catch((err) => console.error(err));
-} else if (fileType === "dataAccess") {
-  generateDataAccess(entityName, actionType)
-    .then((message) => console.log(message))
-    .catch((err) => console.error(err));
-} else if (fileType === "entity") {
-  generateEntity(entityName, actionType)
-    .then((message) => console.log(message))
-    .catch((err) => console.error(err));
+if (!command || !layer || !action || !data) {
+  console.error("You must provide the 4 following args : [command] [layer] [action] [data]");
+} else if (command !== "generate") {
+  console.error("Only the command 'generate' is available in this version");
+} else {
+  if (layer === "controller") {
+    generateController(data, action)
+      .then((message) => console.log("file generated here", message))
+      .catch((err) => console.error(err));
+  } else if (layer === "useCase") {
+    generateUseCase(data, action)
+      .then((message) => console.log("file generated here", message))
+      .catch((err) => console.error(err));
+  } else if (layer === "dataAccess") {
+    generateDataAccess(data, action)
+      .then((message) => console.log("file generated here", message))
+      .catch((err) => console.error(err));
+  } else if (layer === "entity") {
+    generateEntity(data, action)
+      .then((message) => console.log("file generated here", message))
+      .catch((err) => console.error(err));
+  }
 }
