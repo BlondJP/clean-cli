@@ -33,26 +33,26 @@ To generate your files:
 Pattern
 
 ```
-clean-cli -g FILE_TYPE -e MODULE_NAME -a ACTION: [creating, gettingOne, gettingAll, updating, removing]
+clean-cli generate [LAYER] [ACTION] [DATA]
 ```
 
 Example
 
 ```
-clean-cli -g controller -e user -a creating
-clean-cli -g useCase -e user -a creating
-clean-cli -g dataAccess -e user -a creating
-clean-cli -g entity -e user -a creating
+clean-cli generate controller creating user
+clean-cli generate useCase creating user
+clean-cli generate dataAccess creating user
+clean-cli generate entity creating user
 
 ```
 
 or
 
 ```
-clean-cli -g controller -e user -a gettingOne
-clean-cli -g useCase -e user -a gettingOne
-clean-cli -g dataAccess -e user -a gettingOne
-clean-cli -g entity -e user -a gettingOne
+clean-cli generate controller gettingOne user
+clean-cli generate useCase gettingOne user
+clean-cli generate dataAccess gettingOne user
+clean-cli generate entity gettingOne user
 
 ```
 
@@ -82,10 +82,15 @@ Then
 npm run build
 ```
 
+Then
+```
+npm link
+```
+
 then try
 
 ```
-clean-cli -g controller -e user -a creating
+clean-cli generate controller creating user
 ```
 
 ### Testing
