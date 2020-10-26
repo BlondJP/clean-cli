@@ -11,7 +11,8 @@ export default (
         ? capitalizeFirstLetter(camelCaseModuleName)
         : camelCaseModuleName;
 
-    const template = `export default (${camelCaseModuleName}Db) => 
+    const template = `
+module.exports = (${camelCaseModuleName}Db) =>
 async function ${formatedPrefix}${formatedModuleName}(${camelCaseModuleName}Infos) {
 
 }`;
