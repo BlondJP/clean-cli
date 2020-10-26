@@ -11,7 +11,11 @@ export default (
         ? capitalizeFirstLetter(camelCaseModuleName)
         : camelCaseModuleName;
 
-    const template = `export default () => async function ${formatedPrefix}${formatedModuleName}(${camelCaseModuleName}Infos) {}`;
+    const template = `
+module.exports = () =>
+async function ${formatedPrefix}${formatedModuleName}(${camelCaseModuleName}Infos) {
+
+}`;
 
     return template;
   };

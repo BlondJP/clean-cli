@@ -19,8 +19,11 @@ export default (
 
     const useCasePrefix = convertToCamelCase(useCasePrefixes[actions[action]]);
 
-    const template = `export default (${useCasePrefix}${formatedModuleName}) => async function ${formatedPrefix}${formatedModuleName}(httpRequest) {
-    }`;
+    const template = `
+module.exports = (${useCasePrefix}${formatedModuleName}) =>
+async function ${formatedPrefix}${formatedModuleName}(httpRequest) {
+
+}`;
 
     return template;
   };
