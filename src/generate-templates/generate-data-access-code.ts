@@ -7,11 +7,16 @@ export default (
     const functionName: string = dataAccessPrefixes[actions[action]];
     const formatedFuncName: string = convertToCamelCase(functionName);
 
-    const template = `export default () => {
-        async function ${formatedFuncName}() {
-        }
-        return Object.freeze({${formatedFuncName}})
-    }`;
+    const template = `
+module.exports = () => {
+        
+  async function ${formatedFuncName}() {
+
+  }
+
+return Object.freeze({${formatedFuncName}})
+
+}`;
 
     return template;
   };
