@@ -3,7 +3,7 @@ import fs from "fs";
 import makeGenerateDataAccess from "../../src/generate-modules/generate-data-access";
 import appRoot from "app-root-path";
 import { checkFolderExist, createFile, checkFileExist } from "../../src/utils";
-import { dataAccessPrefixes, actions } from "../../src/prefixes";
+import { actions } from "../../src/prefixes";
 
 describe("testing dataAccess", () => {
   it("generate a dataAccess succesfuly full mock", async () => {
@@ -18,6 +18,7 @@ describe("testing dataAccess", () => {
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
     const action = Object.keys(actions)[actions.creating];
+    const ecmaScriptEnabled = faker.random.boolean();
 
     // usage
     const generateDataAccess = makeGenerateDataAccess(
@@ -28,12 +29,14 @@ describe("testing dataAccess", () => {
       checkFileExist
     );
 
-    const filePath = await generateDataAccess(moduleName, action);
+    const filePath = await generateDataAccess(
+      moduleName,
+      action,
+      ecmaScriptEnabled
+    );
 
     expect(checkFolderExist).toHaveBeenCalledWith(`${sourceDir}/data-access`);
-    expect(createTemplate).toHaveBeenCalledWith(
-      action
-    );
+    expect(createTemplate).toHaveBeenCalledWith(action);
     expect(createFile).toHaveBeenCalledWith(filePath, template);
   });
 
@@ -47,6 +50,7 @@ describe("testing dataAccess", () => {
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
     const action = Object.keys(actions)[actions.creating];
+    const ecmaScriptEnabled = faker.random.boolean();
 
     // usage
     const generateDataAccess = makeGenerateDataAccess(
@@ -57,11 +61,13 @@ describe("testing dataAccess", () => {
       checkFileExist
     );
 
-    const filePath = await generateDataAccess(moduleName, action);
-    
-    expect(createTemplate).toHaveBeenCalledWith(
-      action
+    const filePath = await generateDataAccess(
+      moduleName,
+      action,
+      ecmaScriptEnabled
     );
+
+    expect(createTemplate).toHaveBeenCalledWith(action);
 
     expect(typeof filePath).toBe("string");
 
@@ -71,6 +77,5 @@ describe("testing dataAccess", () => {
     // clean tmp directory
     await fs.promises.unlink(filePath);
     await fs.promises.rmdir(sourceDir + "/data-access");
-});
-
+  });
 });

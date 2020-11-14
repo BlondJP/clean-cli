@@ -1,13 +1,14 @@
 export default (
   sourceDir: string,
   createFile: (filePath: string, data: string) => Promise<string>,
-  createTemplate: (action: string) => string,
+  createTemplate: (action: string, ecmaScriptEnabled: boolean) => string,
   checkFolderExist: (folderPath: string) => Promise<boolean>,
   checkFileExist: (filePath: string) => Promise<boolean>
 ) =>
   async function generateDataAccess(
     moduleName: string,
-    action: string
+    action: string,
+    ecmaScriptEnabled: boolean
   ): Promise<string> {
     const fileName = `${moduleName}-db.js`;
 
@@ -17,7 +18,7 @@ export default (
 
     const exists = await checkFileExist(filePath);
     if (!exists) {
-      const template = createTemplate(action);
+      const template = createTemplate(action, ecmaScriptEnabled);
       await createFile(filePath, template);
 
       return filePath;

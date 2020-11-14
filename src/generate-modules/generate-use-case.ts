@@ -4,7 +4,7 @@ export default (
   createTemplate: (
     moduleName: string,
     prefix: string,
-    action: string
+    ecmaScriptEnabled: boolean
   ) => string,
   checkFolderExist: (folderPath: string) => Promise<boolean>,
   useCasePrefixes: string[],
@@ -12,7 +12,8 @@ export default (
 ) =>
   async function generateUseCase(
     moduleName: string,
-    action: string
+    action: string,
+    ecmaScriptEnabled: boolean
   ): Promise<string> {
     const filePrefix = useCasePrefixes[actions[action]];
     const fileName = `${filePrefix}-${moduleName}.js`;
@@ -21,7 +22,7 @@ export default (
     await checkFolderExist(useCasesFolder);
     const filePath = `${useCasesFolder}/${fileName}`;
 
-    const template = createTemplate(moduleName, filePrefix, action);
+    const template = createTemplate(moduleName, filePrefix, ecmaScriptEnabled);
     await createFile(filePath, template);
 
     return filePath;

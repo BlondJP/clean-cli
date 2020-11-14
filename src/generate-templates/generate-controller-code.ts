@@ -7,7 +7,8 @@ export default (
   function generateControllerCode(
     moduleName: string,
     prefix: string,
-    action: string
+    action: string,
+    ecmaScriptEnabled: boolean
   ): string {
     const formatedPrefix = convertToCamelCase(prefix);
     const camelCaseModuleName = convertToCamelCase(moduleName);
@@ -19,11 +20,20 @@ export default (
 
     const useCasePrefix = convertToCamelCase(useCasePrefixes[actions[action]]);
 
-    const template = `
-module.exports = (${useCasePrefix}${formatedModuleName}) =>
-async function ${formatedPrefix}${formatedModuleName}(httpRequest) {
-
-}`;
+    let template: string;
+    if (ecmaScriptEnabled) {
+      template = `
+      export default (${useCasePrefix}${formatedModuleName}) =>
+      async function ${formatedPrefix}${formatedModuleName}(httpRequest) {
+      
+      }`;
+    } else {
+      template = `
+      module.exports = (${useCasePrefix}${formatedModuleName}) =>
+      async function ${formatedPrefix}${formatedModuleName}(httpRequest) {
+      
+      }`;
+    }
 
     return template;
   };

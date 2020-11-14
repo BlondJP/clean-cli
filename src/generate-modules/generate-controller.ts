@@ -4,7 +4,8 @@ export default (
   createTemplate: (
     moduleName: string,
     prefix: string,
-    action: string
+    action: string,
+    ecmaScriptEnabled: boolean
   ) => string,
   checkFolderExist: (folderPath: string) => Promise<boolean>,
   controllerPrefixes: string[],
@@ -12,7 +13,8 @@ export default (
 ) =>
   async function generateController(
     entityName: string,
-    action: string
+    action: string,
+    ecmaScriptEnabled: boolean
   ): Promise<string> {
     const filePrefix: string = controllerPrefixes[actions[action]];
     const fileName: string = `${filePrefix}-${entityName}.js`;
@@ -21,7 +23,12 @@ export default (
     await checkFolderExist(controllersFolder);
     const filePath: string = `${controllersFolder}/${fileName}`;
 
-    const template: string = createTemplate(entityName, filePrefix, action);
+    const template: string = createTemplate(
+      entityName,
+      filePrefix,
+      action,
+      ecmaScriptEnabled
+    );
     await createFile(filePath, template);
 
     return filePath;

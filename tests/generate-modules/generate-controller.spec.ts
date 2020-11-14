@@ -18,6 +18,7 @@ describe("testing generate controller", () => {
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
     const prefix = Object.keys(actions)[actions.creating];
+    const ecmaScriptEnabled = faker.random.boolean();
 
     // usage
     const generateController = makeGenerateController(
@@ -28,7 +29,11 @@ describe("testing generate controller", () => {
       controllerPrefixes,
       actions
     );
-    const filePath = await generateController(moduleName, prefix);
+    const filePath = await generateController(
+      moduleName,
+      prefix,
+      ecmaScriptEnabled
+    );
 
     expect(typeof filePath).toBe("string");
     expect(checkFolderExist).toHaveBeenCalledWith(`${sourceDir}/controllers`);
@@ -50,6 +55,7 @@ describe("testing generate controller", () => {
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
     const prefix = faker.random.word();
+    const ecmaScriptEnabled = faker.random.boolean();
 
     // usage
     const generateController = makeGenerateController(
@@ -60,7 +66,11 @@ describe("testing generate controller", () => {
       controllerPrefixes,
       actions
     );
-    const filePath = await generateController(moduleName, prefix);
+    const filePath = await generateController(
+      moduleName,
+      prefix,
+      ecmaScriptEnabled
+    );
     expect(typeof filePath).toBe("string");
 
     const content = await fs.promises.readFile(filePath, "utf-8");

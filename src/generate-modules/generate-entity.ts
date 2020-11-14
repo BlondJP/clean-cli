@@ -4,7 +4,7 @@ export default (
   createTemplate: (
     moduleName: string,
     prefix: string,
-    action: string
+    ecmaScriptEnabled: boolean
   ) => string,
   checkFolderExist: (folderPath: string) => Promise<boolean>,
   checkFileExist: (filePath: string) => Promise<boolean>,
@@ -13,7 +13,8 @@ export default (
 ) =>
   async function generateEntity(
     moduleName: string,
-    action: string
+    action: string,
+    ecmaScriptEnabled: boolean
   ): Promise<string> {
     const filePrefix = entityPrefixes[actions[action]];
     if (!filePrefix) {
@@ -28,7 +29,11 @@ export default (
 
     const exists = await checkFileExist(filePath);
     if (!exists) {
-      const template = createTemplate(moduleName, filePrefix, action);
+      const template = createTemplate(
+        moduleName,
+        filePrefix,
+        ecmaScriptEnabled
+      );
       await createFile(filePath, template);
       return filePath;
     } else {

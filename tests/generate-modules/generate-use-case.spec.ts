@@ -17,6 +17,7 @@ describe("testing generate use case", () => {
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
     const action = Object.keys(actions)[actions.creating];
+    const ecmaScriptEnabled = faker.random.boolean();
 
     // usage
     const generateUsecase = makeGenerateUseCase(
@@ -28,7 +29,11 @@ describe("testing generate use case", () => {
       actions
     );
 
-    const filePath = await generateUsecase(moduleName, action);
+    const filePath = await generateUsecase(
+      moduleName,
+      action,
+      ecmaScriptEnabled
+    );
     expect(checkFolderExist).toHaveBeenCalledWith(`${sourceDir}/use-cases`);
     expect(createTemplate).toHaveBeenCalledWith(
       moduleName,
@@ -48,6 +53,7 @@ describe("testing generate use case", () => {
     // params
     const moduleName = faker.hacker.noun() + "-" + faker.hacker.noun();
     const action = Object.keys(actions)[actions.creating];
+    const ecmaScriptEnabled = faker.random.boolean();
 
     // usage
     const generateUsecase = makeGenerateUseCase(
@@ -59,7 +65,11 @@ describe("testing generate use case", () => {
       actions
     );
 
-    const filePath = await generateUsecase(moduleName, action);
+    const filePath = await generateUsecase(
+      moduleName,
+      action,
+      ecmaScriptEnabled
+    );
 
     expect(typeof filePath).toBe("string");
 
