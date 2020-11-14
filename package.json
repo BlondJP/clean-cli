@@ -16,6 +16,12 @@
   "bugs": {
     "url": "https://github.com/BlondJP/clean-cli/issues"
   },
+  "keywords": [
+    "clean",
+    "clean js",
+    "clean architecture",
+    "dependency injection"
+  ],
   "bin": {
     "clean-cli": "./dist/index.js"
   },
