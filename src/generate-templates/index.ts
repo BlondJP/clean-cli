@@ -1,6 +1,6 @@
 // dependencies
 import capitalizeFirstLetter from "../utils/capitalize-first-letter";
-import { actions, useCasePrefixes, dataAccessPrefixes } from "../prefixes";
+import { actions, useCasePrefixes, dataAccessPrefixes } from "../constants";
 import kebabCase = require("kebab-case");
 
 // factories

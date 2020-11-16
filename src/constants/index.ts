@@ -32,3 +32,11 @@ export const actions = {
   updating: 3,
   removing: 4,
 };
+
+export const availableLayers = [
+  "controller",
+  "useCase",
+  "dataAccess",
+  "entity",
+  "allLayers",
+]
