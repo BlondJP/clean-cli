@@ -7,7 +7,7 @@ import {
   controllerPrefixes,
   useCasePrefixes,
   entityPrefixes,
-} from "../prefixes";
+} from "../constants";
 
 import { createFile, checkFolderExist, checkFileExist } from "../utils";
 
