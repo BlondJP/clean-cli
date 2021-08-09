@@ -17,8 +17,8 @@ export default (
   ): Promise<string> {
     const filePrefix = entityPrefixes[actions[action]];
     if (!filePrefix) {
-      console.log(`The action ${action} is not available`);
-      return null;
+      console.log(`The action ${action} is not available generating entity`);
+      return 'No file was generated for entity\n';
     }
     const fileName = `${filePrefix}-${moduleName}.js`;
 

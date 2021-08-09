@@ -1,27 +1,21 @@
 // TODO find an abstration to IOC thoses funcs
 import {generateController, generateUseCase, generateDataAccess, generateEntity} from "../generate-modules";
+import {AvailableLayer} from "../constants";
 
 export default class Broker {
-    private layers : Array<string>;
-
-    constructor(layers: Array<string>) {
-        this.layers = layers;
-    }
 
     private async generateLayerModule(layer: string, action: string, data: string): Promise<string> {
-        const [controllerLayer, useCaseLayer, dataAccessLayer, entityLayer, allLayers] = this.layers;
-
         let message: string;
-        if (layer === controllerLayer) {
+        if (layer === AvailableLayer.CONTROLLER) {
             message = await generateController(data, action);
-        } else if (layer === useCaseLayer) {
+        } else if (layer === AvailableLayer.USE_CASE) {
             message = await generateUseCase(data, action);
-        } else if (layer === dataAccessLayer) {
+        } else if (layer === AvailableLayer.DATA_ACCESS) {
             message = await generateDataAccess(data, action);
-        } else if (layer === entityLayer) {
+        } else if (layer === AvailableLayer.ENTITY) {
             message = await generateEntity(data, action);
-        } else if (layer === allLayers) {
-            message += await generateController(data, action) + "\n";
+        } else if (layer === AvailableLayer.ALL_LAYERS) {
+            message = await generateController(data, action) + "\n";
             message += await generateUseCase(data, action) + "\n";
             message += await generateDataAccess(data, action) + "\n";
             message += await generateEntity(data, action) + "\n";
@@ -33,16 +27,13 @@ export default class Broker {
     }
 
     public broke(command: string, layer: string, action: string, data: string): void {
-
         if (command !== "generate") {
             console.error("Only the command 'generate' is available in this version");
             return;
         }
 
-        if (layer)
-
         this.generateLayerModule(layer, action, data)
-            .then((message) => console.log("file generated here", message))
+            .then((message) => console.log("file(s) generated here:\n", message))
             .catch((err) => console.error(err));
     }
 }
