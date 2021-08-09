@@ -39,21 +39,23 @@ clean-cli generate [LAYER] [ACTION] [DATA]
 Example
 
 ```
+clean-cli generate allLayers creating user
+# Equivalent to 
 clean-cli generate controller creating user
 clean-cli generate useCase creating user
 clean-cli generate dataAccess creating user
 clean-cli generate entity creating user
-
 ```
 
 or
 
 ```
+clean-cli generate allLayers gettingOne user
+# Equivalent to 
 clean-cli generate controller gettingOne user
 clean-cli generate useCase gettingOne user
 clean-cli generate dataAccess gettingOne user
 clean-cli generate entity gettingOne user
-
 ```
 
 ### Development on the package

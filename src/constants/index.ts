@@ -33,10 +33,10 @@ export const actions = {
   removing: 4,
 };
 
-export const availableLayers = [
-  "controller",
-  "useCase",
-  "dataAccess",
-  "entity",
-  "allLayers",
-]
+export enum AvailableLayer {
+  CONTROLLER = 'controller',
+  USE_CASE = 'useCase',
+  DATA_ACCESS = 'dataAccess',
+  ENTITY = 'entity',
+  ALL_LAYERS = 'allLayers',
+}
