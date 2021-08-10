@@ -1,30 +1,14 @@
-// TODO find an abstration to IOC thoses funcs
-import {generateController, generateUseCase, generateDataAccess, generateEntity} from "../generate-modules";
-import {AvailableLayer} from "../constants";
+import {AvailableAction, AvailableLayer} from "../constants";
+import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-creators";
 
 export default class Broker {
 
-    private async generateLayerModule(layer: string, action: string, data: string): Promise<string> {
-        let message: string;
-        if (layer === AvailableLayer.CONTROLLER) {
-            message = await generateController(data, action);
-        } else if (layer === AvailableLayer.USE_CASE) {
-            message = await generateUseCase(data, action);
-        } else if (layer === AvailableLayer.DATA_ACCESS) {
-            message = await generateDataAccess(data, action);
-        } else if (layer === AvailableLayer.ENTITY) {
-            message = await generateEntity(data, action);
-        } else if (layer === AvailableLayer.ALL_LAYERS) {
-            message = await generateController(data, action) + "\n";
-            message += await generateUseCase(data, action) + "\n";
-            message += await generateDataAccess(data, action) + "\n";
-            message += await generateEntity(data, action) + "\n";
-        } else {
-            throw new Error(`The layer ${layer} is not valid`);
-        }
-
-        return message;
-    }
+    constructor(
+        private readonly controllerCreator: ControllerCreator,
+        private readonly useCaseCreator: UseCaseCreator,
+        private readonly dataAccessCreator: DataAccessCreator,
+        private readonly entityCreator: EntityCreator,
+        ) {}
 
     public broke(command: string, layer: string, action: string, data: string): void {
         if (command !== "generate") {
@@ -32,8 +16,36 @@ export default class Broker {
             return;
         }
 
-        this.generateLayerModule(layer, action, data)
+        if (!Object.values(AvailableAction).includes(action as unknown as AvailableAction)) {
+            console.error(`Error action ${action} is not Available`);
+            return;
+        }
+
+        const availableAction: AvailableAction = AvailableAction[action];
+        this.generateLayerModule(layer, availableAction, data)
             .then((message) => console.log("file(s) generated here:\n", message))
             .catch((err) => console.error(err));
+    }
+
+    private async generateLayerModule(layer: string, action: AvailableAction, data: string): Promise<string> {
+        let message: string;
+        if (layer === AvailableLayer.CONTROLLER) {
+            message = await this.controllerCreator.create(data, action);
+        } else if (layer === AvailableLayer.USE_CASE) {
+            message = await this.useCaseCreator.create(data, action);
+        } else if (layer === AvailableLayer.DATA_ACCESS) {
+            message = await this.dataAccessCreator.create(data, action);
+        } else if (layer === AvailableLayer.ENTITY) {
+            message = await this.entityCreator.create(data, action);
+        } else if (layer === AvailableLayer.ALL_LAYERS) {
+            message = await this.controllerCreator.create(data, action) + "\n";
+            message += await this.useCaseCreator.create(data, action) + "\n";
+            message += await this.dataAccessCreator.create(data, action) + "\n";
+            message += await this.entityCreator.create(data, action) + "\n";
+        } else {
+            throw new Error(`The layer ${layer} is not valid`);
+        }
+
+        return message;
     }
 }

@@ -28,7 +28,7 @@ export default (fs) => {
       }
       return true;
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
       return false;
     }
   };
