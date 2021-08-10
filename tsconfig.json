@@ -6,9 +6,9 @@
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "resolveJsonModule": true,
-    "target": "es6",
+    "target": "ES5",
     "moduleResolution": "node",
-    "module": "ES2020",
+    "module": "CommonJS",
     "outDir": "dist",
     "sourceMap": true,
     "strict": true

@@ -1,9 +1,10 @@
-export default (fs: any) =>
-  async function checkFileExist(filePath: string): Promise<boolean> {
+import {access} from "fs/promises";
+
+export async function checkFileExist(filePath: string): Promise<boolean> {
     try {
-      await fs.promises.access(filePath, (err: any) => Promise.resolve(!err));
+      await access(filePath);
       return true;
     } catch (err) {
       return false;
     }
-  };
+  }

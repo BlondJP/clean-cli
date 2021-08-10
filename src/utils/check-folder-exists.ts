@@ -1,35 +1,31 @@
-export default (fs) => {
-  async function isFolderExisting(folderPath) {
-    try {
-      await fs.promises.access(folderPath, (err) => Promise.resolve(!err));
-      return true;
-    } catch (err) {
-      return false;
-    }
-  }
+import {access, mkdir} from "fs/promises";
 
-  function createFolder(folderPath) {
-    return fs.promises.mkdir(folderPath, { recursive: true }, (err) => {
-      if (err) {
-        Promise.reject(err);
-      } else {
-        const sentence = `folder ${folderPath} has been created`;
-        console.log(sentence);
-        Promise.resolve(sentence);
-      }
-    });
+async function isFolderExisting(folderPath: string): Promise<boolean> {
+  try {
+    await access(folderPath);
+    return true;
+  } catch (err) {
+    return false;
   }
+}
 
-  return async function checkFolderExist(folderPath: string): Promise<boolean> {
-    try {
-      const exists = await isFolderExisting(folderPath);
-      if (!exists) {
-        await createFolder(folderPath);
-      }
-      return true;
-    } catch (err) {
-      console.error(err.message);
-      return false;
+async function createFolder(folderPath: string): Promise<boolean> {
+  try {
+    await mkdir(folderPath, { recursive: true });
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+export async function checkFolderExist(folderPath: string): Promise<boolean> {
+  try {
+    const exists = await isFolderExisting(folderPath);
+    if (!exists) {
+      await createFolder(folderPath);
     }
-  };
-};
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
