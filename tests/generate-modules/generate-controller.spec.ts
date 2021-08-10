@@ -1,6 +1,6 @@
 import faker from "faker";
 import fs from "fs";
-import makeGenerateController from "../../src/generate-modules/generate-controller";
+import makeGenerateController from "../../src/module-generators/generate-controller";
 import appRoot from "app-root-path";
 import { checkFolderExist, createFile } from "../../src/utils";
 import { controllerPrefixes, actions } from "../../src/prefixes";

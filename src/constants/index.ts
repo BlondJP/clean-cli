@@ -17,13 +17,7 @@ export const useCasePrefixes = [
 // to specify
 export const entityPrefixes = ["build", null, null, "update", null];
 
-export const dataAccessPrefixes = [
-  "insert",
-  "find-one", // maybe "select" to respect SQL vocabulary
-  "find-all",
-  "update",
-  "remove",
-];
+
 
 export const actions = {
   creating: 0,
@@ -47,7 +41,7 @@ export enum ControllerPrefix {
   GETTING_ALL = "find-all",
   UPDATING = "update",
   REMOVING = "delete",
-};
+}
 
 export enum UseCasePrefix {
   CREATING = 'add',
@@ -55,7 +49,23 @@ export enum UseCasePrefix {
   GETTING_ALL = "get-all",
   UPDATING = "edit",
   REMOVING = "remove",
-};
+}
+
+export enum DataAccessPrefix {
+  CREATING = 'insert',
+  GETTING_ONE = 'find-one',
+  GETTING_ALL = 'find-all',
+  UPDATING = "update",
+  REMOVING = 'remove',
+}
+
+export enum EntityPrefix {
+  CREATING = 'build',
+  GETTING_ONE = '',
+  GETTING_ALL = '',
+  UPDATING = "update",
+  REMOVING = '',
+}
 
 export enum AvailableLayer {
   CONTROLLER = 'controller',

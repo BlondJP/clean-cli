@@ -8,7 +8,6 @@ program.version("1.4.0");
 program.parse(process.argv);
 
 const [command, layer, action, data] = program.args;
-console.log("received", {command, layer, action, data});
 
 if (!command || !layer || !action || !data) {
   console.error("You must provide the 4 following args : [command] [layer] [action] [data]");

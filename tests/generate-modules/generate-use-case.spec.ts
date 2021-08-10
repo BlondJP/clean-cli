@@ -1,6 +1,6 @@
 import faker from "faker";
 import fs from "fs";
-import makeGenerateUseCase from "../../src/generate-modules/generate-use-case";
+import makeGenerateUseCase from "../../src/module-generators/generate-use-case";
 import appRoot from "app-root-path";
 import { checkFolderExist, createFile } from "../../src/utils";
 import { useCasePrefixes, actions } from "../../src/prefixes";

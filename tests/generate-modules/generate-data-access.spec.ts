@@ -1,6 +1,6 @@
 import faker from "faker";
 import fs from "fs";
-import makeGenerateDataAccess from "../../src/generate-modules/generate-data-access";
+import makeGenerateDataAccess from "../../src/module-generators/generate-data-access";
 import appRoot from "app-root-path";
 import { checkFolderExist, createFile, checkFileExist } from "../../src/utils";
 import { dataAccessPrefixes, actions } from "../../src/prefixes";
