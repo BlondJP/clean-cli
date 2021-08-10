@@ -7,6 +7,7 @@ export class FileGenerator {
             return filePath;
         } catch(err) {
             console.error(err);
+            return err.message;
         }
     }
 }

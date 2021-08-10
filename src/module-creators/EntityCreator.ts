@@ -1,9 +1,8 @@
 import {ModuleCreator} from "./ModuleCreator";
 import {AvailableAction, EntityPrefix} from "../constants";
 import {FileGenerator} from "../utils/FileGenerator";
-import {ControllerGenerator} from "../template-generators/ControllerGenerator";
 import {checkFileExist, checkFolderExist} from "../utils";
-import {EntityGenerator} from "../template-generators/EntityGenerator";
+import {EntityGenerator} from "../template-generators";
 
 export class EntityCreator implements ModuleCreator {
     constructor(
@@ -30,7 +29,7 @@ export class EntityCreator implements ModuleCreator {
             await this.fileGenerator.generate(filePath, template);
             return filePath;
         } else {
-            console.error(`There already is a file ${filePath}`);
+            return `There already is a file ${filePath}`;
         }
     }
 
