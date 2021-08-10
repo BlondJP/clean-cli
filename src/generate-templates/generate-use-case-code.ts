@@ -3,6 +3,7 @@ export default (
   capitalizeFirstLetter: (str: string) => string
 ) =>
   function generateUseCaseCode(moduleName: string, prefix: string) {
+    console.log()
     const formatedPrefix = convertToCamelCase(prefix);
     const camelCaseModuleName = convertToCamelCase(moduleName);
 

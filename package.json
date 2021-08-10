@@ -28,7 +28,6 @@
   "homepage": "https://github.com/BlondJP/clean-cli#readme",
   "dependencies": {
     "commander": "^6.1.0",
-    "kebab-case": "^1.0.0",
     "systemjs": "^6.5.1"
   },
   "devDependencies": {
