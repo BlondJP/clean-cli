@@ -1,7 +1,7 @@
 import Broker from "./Broker"
 import currentDir from "../../get-current-dir";
 import {FileGenerator} from "../utils/FileGenerator";
-import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-generators";
+import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-creators";
 import {ControllerGenerator, UseCaseGenerator, EntityGenerator, DataAccessGenerator} from "../template-generators";
 
 const sourceDir: string = `${currentDir()}/src`;

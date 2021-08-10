@@ -1,5 +1,5 @@
 import {AvailableAction, AvailableLayer} from "../constants";
-import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-generators";
+import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-creators";
 
 export default class Broker {
 
