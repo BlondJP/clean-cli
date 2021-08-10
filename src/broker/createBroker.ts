@@ -1,10 +1,10 @@
 import Broker from "./Broker"
-import currentDir from "../../get-current-dir";
+import currentDir from "../utils/get-current-dir";
 import {FileGenerator} from "../utils/FileGenerator";
-import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-creators";
-import {ControllerGenerator, UseCaseGenerator, EntityGenerator, DataAccessGenerator} from "../template-generators";
+import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from '../module-creators';
+import {ControllerGenerator, UseCaseGenerator, EntityGenerator, DataAccessGenerator} from '../template-generators';
 
-const sourceDir: string = `${currentDir()}/src`;
+const sourceDir = `${currentDir()}/src`;
 
 export default function createBroker(): Broker {
     const controllerCreator = new ControllerCreator(new FileGenerator(), new ControllerGenerator(), sourceDir);

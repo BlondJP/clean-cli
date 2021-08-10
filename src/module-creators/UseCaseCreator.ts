@@ -12,17 +12,16 @@ export class UseCaseCreator implements ModuleCreator {
     ) {}
     public async create(entityName: string, action: AvailableAction): Promise<string> {
         const filePrefix: UseCasePrefix = UseCasePrefix[action];
-        const fileName: string = `${filePrefix}-${entityName}.js`;
+        const fileName = `${filePrefix}-${entityName}.js`;
 
         const useCasesFolder = `${this.sourceDir}/use-cases`;
         await checkFolderExist(useCasesFolder);
 
-        const filePath: string = `${useCasesFolder}/${fileName}`;
+        const filePath = `${useCasesFolder}/${fileName}`;
         const template: string = this.templateGenerator.generate(entityName, filePrefix, action);
 
         await this.fileGenerator.generate(filePath, template);
 
         return filePath;
     }
-
 }

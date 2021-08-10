@@ -2,7 +2,6 @@ import {AvailableAction, AvailableLayer} from "../constants";
 import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-creators";
 
 export default class Broker {
-
     constructor(
         private readonly controllerCreator: ControllerCreator,
         private readonly useCaseCreator: UseCaseCreator,

@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "alwaysStrict": true,
     "esModuleInterop": true,
+    "lib": ["dom", "ES2020"],
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "target": "es6",
     "moduleResolution": "node",
-    "module": "CommonJS",
+    "module": "ES2020",
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "strict": true
   },
   "include": ["src/**/*", "index.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]

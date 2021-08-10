@@ -2,7 +2,7 @@ import {ModuleCreator} from "./ModuleCreator";
 import {AvailableAction} from "../constants";
 import {checkFileExist, checkFolderExist} from "../utils";
 import {FileGenerator} from "../utils/FileGenerator";
-import {ControllerGenerator} from "../template-generators/ControllerGenerator";
+import {ControllerGenerator} from "../template-generators";
 
 export class DataAccessCreator implements ModuleCreator {
     constructor(
@@ -25,8 +25,7 @@ export class DataAccessCreator implements ModuleCreator {
 
             return filePath;
         } else {
-            console.error(`There already is a file ${filePath}`);
+            return `There already is a file ${filePath}`;
         }
     }
-
 }
