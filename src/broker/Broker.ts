@@ -21,22 +21,27 @@ export default class Broker {
         }
 
         const availableAction: AvailableAction = AvailableAction[action];
-        this.generateLayerModule(layer, availableAction, data)
+        this.generateModuleLayer(layer, availableAction, data)
             .then((message) => console.log("file(s) generated here:\n", message))
             .catch((err) => console.error(err));
     }
 
-    private async generateLayerModule(layer: string, action: AvailableAction, data: string): Promise<string> {
+    private async generateModuleLayer(layer: string, action: AvailableAction, data: string): Promise<string> {
         let message: string;
         if (layer === AvailableLayer.CONTROLLER) {
+            // TODO catch error message to display with beauty
             message = await this.controllerCreator.create(data, action);
         } else if (layer === AvailableLayer.USE_CASE) {
+            // TODO catch error message to display with beauty
             message = await this.useCaseCreator.create(data, action);
         } else if (layer === AvailableLayer.DATA_ACCESS) {
+            // TODO catch error message to display with beauty
             message = await this.dataAccessCreator.create(data, action);
         } else if (layer === AvailableLayer.ENTITY) {
+            // TODO catch error message to display with beauty
             message = await this.entityCreator.create(data, action);
         } else if (layer === AvailableLayer.ALL_LAYERS) {
+            // TODO catch error message to display with beauty
             message = await this.controllerCreator.create(data, action) + "\n";
             message += await this.useCaseCreator.create(data, action) + "\n";
             message += await this.dataAccessCreator.create(data, action) + "\n";

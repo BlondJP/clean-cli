@@ -15,7 +15,7 @@ export class EntityCreator implements ModuleCreator {
         const filePrefix = EntityPrefix[action];
         if (!filePrefix) {
             console.error(`The action ${action} is not available generating entity`);
-            return 'No file was generated for entity\n';
+            throw new Error('No file was generated for entity');
         }
         const fileName = `${filePrefix}-${entityName}.js`;
 
@@ -29,8 +29,7 @@ export class EntityCreator implements ModuleCreator {
             await this.fileGenerator.generate(filePath, template);
             return filePath;
         } else {
-            return `There already is a file ${filePath}`;
+            throw new Error(`There already is an entity file ${filePath}`);
         }
     }
-
 }
