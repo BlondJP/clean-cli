@@ -1,8 +1,8 @@
 import {ModuleCreator} from "./ModuleCreator";
-import {AvailableAction, ControllerPrefix, UseCasePrefix} from "../constants";
+import {AvailableAction, UseCasePrefix} from "../constants";
 import {FileGenerator} from "../utils/FileGenerator";
-import {checkFolderExist} from "../utils";
-import {UseCaseGenerator} from "../template-generators/UseCaseGenerator";
+import {checkFileExist, checkFolderExist} from "../utils";
+import {UseCaseGenerator} from "../template-generators";
 
 export class UseCaseCreator implements ModuleCreator {
     constructor(
@@ -18,10 +18,13 @@ export class UseCaseCreator implements ModuleCreator {
         await checkFolderExist(useCasesFolder);
 
         const filePath = `${useCasesFolder}/${fileName}`;
-        const template: string = this.templateGenerator.generate(entityName, filePrefix, action);
-
-        await this.fileGenerator.generate(filePath, template);
-
-        return filePath;
+        const exists = await checkFileExist(filePath);
+        if (!exists) {
+            const template: string = this.templateGenerator.generate(entityName, filePrefix, action);
+            await this.fileGenerator.generate(filePath, template);
+            return filePath;
+        } else {
+            throw new Error(`There already is a useCase file ${filePath}`);
+        }
     }
 }

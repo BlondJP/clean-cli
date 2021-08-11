@@ -6,8 +6,7 @@ export class FileGenerator {
             await writeFile(filePath, data);
             return filePath;
         } catch(err) {
-            console.error(err);
-            return err.message;
+            throw new Error('Error occurred during creation of the file : ' + filePath);
         }
     }
 }

@@ -1,6 +1,6 @@
 import {FileGenerator} from "../utils/FileGenerator";
 import {AvailableAction, ControllerPrefix} from "../constants";
-import {checkFolderExist} from "../utils";
+import {checkFileExist, checkFolderExist} from "../utils";
 import {ModuleCreator} from "./ModuleCreator";
 import {ControllerGenerator} from "../template-generators";
 
@@ -17,11 +17,15 @@ export class ControllerCreator implements ModuleCreator {
 
         const controllersFolder = `${this.sourceDir}/controllers`;
         await checkFolderExist(controllersFolder);
+
         const filePath = `${controllersFolder}/${fileName}`;
-        const template: string = this.templateGenerator.generate(entityName, filePrefix, action);
-
-        await this.fileGenerator.generate(filePath, template);
-
-        return filePath;
+        const exists = await checkFileExist(filePath);
+        if (!exists) {
+            const template: string = this.templateGenerator.generate(entityName, filePrefix, action);
+            await this.fileGenerator.generate(filePath, template);
+            return filePath;
+        } else {
+            throw new Error(`There already is a controller file ${filePath}`);
+        }
     }
 }

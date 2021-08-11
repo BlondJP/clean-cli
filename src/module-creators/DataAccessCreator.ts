@@ -25,7 +25,7 @@ export class DataAccessCreator implements ModuleCreator {
 
             return filePath;
         } else {
-            return `There already is a file ${filePath}`;
+            throw new Error(`There already is a dataAccess file ${filePath}`);
         }
     }
 }

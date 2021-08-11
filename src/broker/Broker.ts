@@ -1,5 +1,7 @@
 import {AvailableAction, AvailableLayer} from "../constants";
 import {ControllerCreator, UseCaseCreator, EntityCreator, DataAccessCreator} from "../module-creators";
+import {Logger} from "../logger/Logger";
+import {Log} from "../logger/Log";
 
 export default class Broker {
     constructor(
@@ -7,44 +9,85 @@ export default class Broker {
         private readonly useCaseCreator: UseCaseCreator,
         private readonly dataAccessCreator: DataAccessCreator,
         private readonly entityCreator: EntityCreator,
+        private readonly logger: Logger,
         ) {}
 
-    public broke(command: string, layer: string, action: string, data: string): void {
+    public async broke(command: string, layer: string, action: string, data: string): Promise<void> {
         if (command !== "generate") {
-            console.error("Only the command 'generate' is available in this version");
+            this.logger.error('Only the command \'generate\' is available in this version');
             return;
         }
 
         if (!Object.values(AvailableAction).includes(action as unknown as AvailableAction)) {
-            console.error(`Error action ${action} is not Available`);
+            this.logger.error(`Error action ${action} is not Available`);
             return;
         }
 
         const availableAction: AvailableAction = AvailableAction[action];
-        this.generateLayerModule(layer, availableAction, data)
-            .then((message) => console.log("file(s) generated here:\n", message))
-            .catch((err) => console.error(err));
+        try {
+            const logs = await this.generateModuleLayer(layer, availableAction, data);
+            const header = 'Congratulations, you just generated the following results:';
+            this.logger.info(header);
+            this.logger.handle(logs);
+        } catch (err) {
+            this.logger.error(err.message);
+        }
     }
 
-    private async generateLayerModule(layer: string, action: AvailableAction, data: string): Promise<string> {
-        let message: string;
+    private async generateModuleLayer(layer: string, action: AvailableAction, data: string): Promise<Array<Log>> {
+        const logs: Array<Log> = [];
+
         if (layer === AvailableLayer.CONTROLLER) {
-            message = await this.controllerCreator.create(data, action);
+            logs.push(await this.handleControllerCreating(data, action));
         } else if (layer === AvailableLayer.USE_CASE) {
-            message = await this.useCaseCreator.create(data, action);
+            logs.push(await this.handleUseCaseCreating(data, action));
         } else if (layer === AvailableLayer.DATA_ACCESS) {
-            message = await this.dataAccessCreator.create(data, action);
+            logs.push(await this.handleDataAccessCreating(data, action));
         } else if (layer === AvailableLayer.ENTITY) {
-            message = await this.entityCreator.create(data, action);
+            logs.push(await this.handleEntityCreating(data, action));
         } else if (layer === AvailableLayer.ALL_LAYERS) {
-            message = await this.controllerCreator.create(data, action) + "\n";
-            message += await this.useCaseCreator.create(data, action) + "\n";
-            message += await this.dataAccessCreator.create(data, action) + "\n";
-            message += await this.entityCreator.create(data, action) + "\n";
+            logs.push(await this.handleControllerCreating(data, action));
+            logs.push(await this.handleUseCaseCreating(data, action));
+            logs.push(await this.handleDataAccessCreating(data, action));
+            logs.push(await this.handleEntityCreating(data, action));
         } else {
             throw new Error(`The layer ${layer} is not valid`);
         }
 
-        return message;
+        return logs;
+    }
+
+    // Wrap Creators execution generating logs
+    private async handleControllerCreating(data: string, action: AvailableAction): Promise<Log> {
+        try {
+            const filePath = await this.controllerCreator.create(data, action);
+            return {content: `The following file has been created ${filePath}`, type: "info"};
+        } catch(err) {
+            return {content: err.message, type: "error"};
+        }
+    }
+    private async handleUseCaseCreating(data: string, action: AvailableAction): Promise<Log> {
+        try {
+            const filePath = await this.useCaseCreator.create(data, action);
+            return {content: `The following file has been created ${filePath}`, type: "info"};
+        } catch(err) {
+            return {content: err.message, type: "error"};
+        }
+    }
+    private async handleDataAccessCreating(data: string, action: AvailableAction): Promise<Log> {
+        try {
+            const filePath = await this.dataAccessCreator.create(data, action);
+            return {content: `The following file has been created ${filePath}`, type: "info"};
+        } catch(err) {
+            return {content: err.message, type: "error"};
+        }
+    }
+    private async handleEntityCreating(data: string, action: AvailableAction): Promise<Log> {
+        try {
+            const filePath = await this.entityCreator.create(data, action);
+            return {content: `The following file has been created ${filePath}`, type: "info"};
+        } catch(err) {
+            return {content: err.message, type: "error"};
+        }
     }
 }
