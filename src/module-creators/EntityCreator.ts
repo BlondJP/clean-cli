@@ -3,6 +3,7 @@ import {AvailableAction, EntityPrefix} from "../constants";
 import {FileGenerator} from "../utils/FileGenerator";
 import {checkFileExist, checkFolderExist} from "../utils";
 import {EntityGenerator} from "../template-generators";
+import {Logger} from "../logger/Logger";
 
 export class EntityCreator implements ModuleCreator {
     constructor(
@@ -14,7 +15,6 @@ export class EntityCreator implements ModuleCreator {
     public async create(entityName: string, action: AvailableAction): Promise<string> {
         const filePrefix = EntityPrefix[action];
         if (!filePrefix) {
-            console.error(`The action ${action} is not available generating entity`);
             throw new Error('No file was generated for entity');
         }
         const fileName = `${filePrefix}-${entityName}.js`;
