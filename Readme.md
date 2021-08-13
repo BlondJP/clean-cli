@@ -10,20 +10,20 @@ You need to have a nodejs project and go to the root directory.
 
 ```
 npm
-node
+node 14+
 ```
 
 ### Installing
 
 If you got an old version of clean-cli.
 
-```
+```shell
 npm uninstall clean-cli -g
 ```
 
 then
 
-```
+```shell
 npm install clean-cli -g
 ```
 
@@ -32,13 +32,13 @@ npm install clean-cli -g
 To generate your files:
 Pattern
 
-```
+```shell
 clean-cli generate [LAYER] [ACTION] [DATA]
 ```
 
 Example
 
-```
+```shell
 clean-cli generate allLayers gettingOne user
 # Equivalent to 
 clean-cli generate controller gettingOne user
@@ -52,12 +52,12 @@ clean-cli generate entity gettingOne user
 ### Generate Server
 
 Execute the command to create all the layers of your endpoint.
-```
+```shell
 clean-cli generate allLayers creating user
 ```
 
 Create an index.js initializing the server
-```
+```js
 // src/index.js
 
 const express = require('express')
@@ -73,7 +73,7 @@ app.listen(port, () => {
 ```
 
 Then execute:
-```
+```shell
 # If the project is brand new
 npm init 
 npm install express --save
@@ -82,7 +82,7 @@ npm install express --save
 ### Carry out the Dependency injection
 
 Copy this file in src/controllers/ :
-```
+```js
 // src/controllers/index.js
 
 /* Dependencies */
@@ -99,7 +99,7 @@ exports.createUser = createUser;
 ```
 
 Copy this file in src/entities/ :
-```
+```js
 // src/entities/index.js
 
 /* Dependencies */
@@ -116,7 +116,7 @@ exports.buildUser = buildUser;
 ```
 
 Copy this file in src/data-access/ :
-```
+```js
 // src/data-access/index.js
 
 /* Dependencies */
@@ -132,7 +132,7 @@ exports.userDb = userDb;
 ```
 
 Copy this file in src/use-cases/ :
-```
+```js
 // src/use-cases/index.js
 
 /* Dependencies */
@@ -152,7 +152,7 @@ exports.addUser = addUser;
 ### Fill the Skeletons
 
 Fill your controller, here is an example :
-```
+```js
 // src/controller/create-user.js
 
 module.exports = (addUser) =>
@@ -163,7 +163,7 @@ async function createUser(request, response) {
 }
 ```
 Fill your useCase, here is an example :
-```
+```js
 // src/use-cases/add-user.js
 
 module.exports = (buildUser, userDb) =>
@@ -175,7 +175,7 @@ async function addUser(userInfo) {
 }
 ```
 Fill your entity, here is an example :
-```
+```js
 // src/entities/build-user.js
 
 module.exports = () =>
@@ -190,7 +190,7 @@ async function buildUser(userInfo) {
 }
 ```
 Fill your dataAccess, here is an example :
-```
+```js
 // src/data-access/user-db.js
 
 module.exports = () => {
@@ -210,12 +210,12 @@ return Object.freeze({insert})
 ### Test your app
 
 Launch the server
-```
+```shell
 node src/index.js
 ```
 
 Then consume your endpoint
-```
+```shell
 curl --request POST --url http://localhost:3000/user
 ```
 
