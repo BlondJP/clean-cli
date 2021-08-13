@@ -1,5 +1,5 @@
 import {TemplateGenerator} from "./TemplateGenerator";
-import {AvailableAction} from "../constants";
+import {AvailableAction, EntityPrefix} from "../constants";
 import {reverse as convertToCamelCase} from "../utils/caseUtils";
 import capitalizeFirstLetter from "../utils/capitalize-first-letter";
 
@@ -13,9 +13,12 @@ export class UseCaseGenerator implements TemplateGenerator {
                 ? capitalizeFirstLetter(camelCaseModuleName)
                 : camelCaseModuleName;
 
+        const entityPrefix = EntityPrefix[action];
+        const injectedEntityName = `${entityPrefix}${formattedModuleName}`;
+
         return `
-module.exports = (${camelCaseModuleName}Db) =>
-async function ${formattedPrefix}${formattedModuleName}(${camelCaseModuleName}Infos) {
+module.exports = (${injectedEntityName}, ${camelCaseModuleName}Db) =>
+async function ${formattedPrefix}${formattedModuleName}(${camelCaseModuleName}Info) {
 
 }`
     }
