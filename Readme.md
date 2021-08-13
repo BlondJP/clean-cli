@@ -131,6 +131,66 @@ const userDb = makeUserDb();
 exports.userDb = userDb;
 ```
 
+### Fill the Skeletons
+
+Fill your controller, here is an example :
+```
+// src/controller/create-user.js
+
+module.exports = (addUser) =>
+async function createUser(request, response) {
+    const user = await addUser();
+    console.log('user', user);
+    return response.send(user);
+}
+```
+Fill your useCase, here is an example :
+```
+// src/use-cases/add-user.js
+
+module.exports = (buildUser, userDb) =>
+async function addUser(userInfo) {
+    const user = buildUser(userInfo);
+    const added = await userDb.insert(user);
+    console.log(added);
+    return added;
+}
+```
+Fill your entity, here is an example :
+```
+// src/entities/build-user.js
+
+module.exports = () =>
+async function buildUser(userInfo) {
+    const user = {};
+    
+    if (typeof userInfo.username === 'string') {
+        user.username = userInfo.username;
+    }
+    
+    return user;
+}
+```
+Fill your dataAccess, here is an example :
+```
+// src/data-access/user-db.js
+
+module.exports = () => {
+
+  const users = [];
+        
+  async function insert(user) {
+    users.push(user);
+    return user;
+  }
+
+return Object.freeze({insert})
+
+}
+```
+
+### Test your app
+
 Launch the server
 ```
 node src/index.js
@@ -141,14 +201,14 @@ Then consume your endpoint
 curl --request POST --url http://localhost:3000/user
 ```
 
-### About Clean Architecture
+## About Clean Architecture
 
 If you need more information about clean architecture, I highly recommend this video :
 ```
 https://www.youtube.com/watch?v=fy6-LSE_zjI&t=1831s&ab_channel=DevMastery
 ```
 
-### Development on the package
+## Development on the package
 
 First
 
@@ -201,7 +261,6 @@ npm run test
 
 Clean-cli is an open source project, it is functional in his state.<br>
 It is also forkable if you need to adapt it to your needs.
-
 
 
 If this project helped you, please star his repository.<br>
