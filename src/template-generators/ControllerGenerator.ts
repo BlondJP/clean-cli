@@ -17,7 +17,7 @@ export class ControllerGenerator implements TemplateGenerator {
 
         return `
 module.exports = (${useCasePrefix}${formattedModuleName}) =>
-async function ${formattedPrefix}${formattedModuleName}(httpRequest) {
+async function ${formattedPrefix}${formattedModuleName}(request, response) {
 
 }`;
     }
