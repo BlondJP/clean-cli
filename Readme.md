@@ -115,6 +115,23 @@ const addUser = makeAddUser(userDb);
 exports.addUser = addUser;
 ```
 
+Copy this file in src/entities/ :
+```
+// src/entities/index.js
+
+/* Dependencies */
+
+/* Factories */
+const makeBuildUser = require('./build-user');
+
+/* Injections */
+const buildUser = makeBuildUser();
+
+/* Exports */
+exports.buildUser = buildUser;
+
+```
+
 Copy this file in src/data-access/ :
 ```
 // src/data-access/index.js
