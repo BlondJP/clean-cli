@@ -98,23 +98,6 @@ const createUser = makeCreateUser(addUser);
 exports.createUser = createUser;
 ```
 
-Copy this file in src/use-cases/ :
-```
-// src/use-cases/index.js
-
-/* Dependencies */
-const {userDb} = require('../data-access');
-
-/* Factories */
-const makeAddUser = require('./add-user');
-
-/* Injections */
-const addUser = makeAddUser(userDb);
-
-/* Exports */
-exports.addUser = addUser;
-```
-
 Copy this file in src/entities/ :
 ```
 // src/entities/index.js
@@ -146,6 +129,24 @@ const userDb = makeUserDb();
 
 /* Exports */
 exports.userDb = userDb;
+```
+
+Copy this file in src/use-cases/ :
+```
+// src/use-cases/index.js
+
+/* Dependencies */
+const {buildUser} = require('../entities');
+const {userDb} = require('../data-access');
+
+/* Factories */
+const makeAddUser = require('./add-user');
+
+/* Injections */
+const addUser = makeAddUser(buildUser, userDb);
+
+/* Exports */
+exports.addUser = addUser;
 ```
 
 ### Fill the Skeletons
