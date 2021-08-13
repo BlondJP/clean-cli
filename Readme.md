@@ -156,7 +156,7 @@ Fill your controller, here is an example :
 
 module.exports = (addUser) =>
 async function createUser(request, response) {
-    const user = await addUser();
+    const user = await addUser({username: 'Linus'});
     console.log('user', user);
     return response.send(user);
 }
@@ -181,7 +181,7 @@ module.exports = () =>
 async function buildUser(userInfo) {
     const user = {};
     
-    if (typeof userInfo.username === 'string') {
+    if (userInfo && typeof userInfo?.username === 'string') {
         user.username = userInfo.username;
     }
     
