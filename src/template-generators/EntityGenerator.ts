@@ -16,7 +16,7 @@ export class EntityGenerator implements TemplateGenerator {
         return `
 module.exports = () =>
 async function ${formattedPrefix}${formattedModuleName}(${camelCaseModuleName}Infos) {
-
+    
 }`;
     }
 }
